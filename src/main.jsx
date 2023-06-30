@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Login from './routes/Login';
+import CreateAccount from './routes/CreateAccount';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <div>Landing Page</div>
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/createAccount',
+    element: <CreateAccount />
   },
 ]);
 
