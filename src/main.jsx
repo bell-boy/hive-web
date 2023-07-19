@@ -12,7 +12,10 @@ import CreateAccount from './routes/CreateAccount.jsx';
 import { action as createAccountAction, loader as createAccountLoader } from './routes/CreateAccount.jsx';
 
 import Home from './routes/Home.jsx';
-import { loader as homeLoader } from './routes/Home';
+import { loader as homeLoader } from './routes/Home.jsx';
+
+import Profile from './routes/Profile.jsx';
+import { loader as profileLoader } from './routes/Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +32,14 @@ const router = createBrowserRouter([
 	{
 		path: '/home',
 		element: <Home />,
-		loader: homeLoader
+		loader: homeLoader,
+		children: [
+			{
+				path: 'profile/:userid',
+				element: <Profile />,
+				loader: profileLoader
+			}
+		]
 	},
 	{
 		path: '/register',

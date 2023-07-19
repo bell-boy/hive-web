@@ -1,6 +1,6 @@
 import { auth } from '../firebase.js';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { redirect, useNavigate } from 'react-router-dom'; 
+import { redirect, useNavigate, Outlet } from 'react-router-dom'; 
 
 const loader = async () =>
 {
@@ -32,6 +32,7 @@ const Home = () =>
 			<header>
 				<button onClick={logoutHandler}>logout</button>	
 			</header>
+			<Outlet />
 		</>
 	);
 };

@@ -1,6 +1,7 @@
-import { Form } from 'react-router-dom';
-import { auth } from '../firebase.js';
+import { auth, database } from '../firebase.js';
 import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
+import { Form } from 'react-router-dom';
 import { redirect, Link } from 'react-router-dom';
 
 const action = async ({params, request}) =>
@@ -9,8 +10,13 @@ const action = async ({params, request}) =>
 	try
 	{
 		const userCred = await createUserWithEmailAndPassword(auth, formData.get('username'), formData.get('password'));
-		console.log(userCred);
-		return redirect('/home');
+		set(ref(database, `users/${userCred.user.uid}`), {
+			firstName: 'John',
+			lastName: 'Doe',
+			gradYear: 2024,
+			gpa: 3.8
+		});
+		return redirect(`/home/profile/${userCred.user.uid}`);
 	} catch (error)
 	{
 		console.log(error.code);	
