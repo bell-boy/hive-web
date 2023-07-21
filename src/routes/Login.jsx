@@ -2,6 +2,7 @@ import { Form } from 'react-router-dom';
 import { auth } from '../firebase.js';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { redirect, Link } from 'react-router-dom';
+import '../styles/stylesheet.css';
 
 const action = async ({params, request}) =>
 {
@@ -31,16 +32,16 @@ const loader = async () =>
 const Login = () =>
 {
 	return(
-		<div>
-			<Form method='post'>
+		<div className='site-flexbox'>
+			<Form method='post' className='auth-form'>
 				<h1>login</h1>
-				<input type='text' name='username' />
+				<input type='text' name='username' placeholder='Email Adrress' className='input-bar'/>
 				<br />
-				<input type='password' name='password'/>
+				<input type='password' name='password' placeholder ='Password' className='input-bar'/>
 				<br />
-				<input type='submit' />
+				<input type='submit' className='button-primary' />
+				<Link to='/register'>create account</Link>
 			</Form>
-			<Link to='/register'>create account</Link>
 		</div>
 	);
 };

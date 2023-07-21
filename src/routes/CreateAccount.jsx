@@ -37,14 +37,15 @@ const loader = async () =>
 const CreateAccount = () =>
 {
 	return(
-		<div>
-			<Form method='post'>
+		<div className='site-flexbox'>
+			<Form method='post' className='auth-form'>
 				<h1>register</h1>
-				<input type='text' name='username' />
+				<input type='text' name='username' placeholder='Email Adrress' className='input-bar' />
 				<br />
-				<input type='password' name='password'/>
+				<input type='password' name='password' placeholder='Password' className='input-bar'/>
 				<br />
-				<input type='submit' />
+				<input type='submit' className='button-primary' />
+				<Link to='/login'>login</Link>
 			</Form>
 		</div>
 	);
