@@ -21,32 +21,34 @@ const router = createBrowserRouter([
   {
 		path: '/',
 		element: <Root />,
-		loader: rootLoader
-  },
-  {
-		path: '/login',
-		element: <Login />,
-		action: loginAction,
-		loader: loginLoader
-  },
-	{
-		path: '/home',
-		element: <Home />,
-		loader: homeLoader,
+		loader: rootLoader,
 		children: [
+			{
+				path: '/login',
+				element: <Login />,
+				action: loginAction,
+				loader: loginLoader
+			},
+			{
+				path: '/register',
+				element: <CreateAccount />,
+				loader: createAccountLoader,
+				action: createAccountAction
+			},
 			{
 				path: 'profile/:userid',
 				element: <Profile />,
 				loader: profileLoader
 			}
 		]
-	},
+  },
 	{
-		path: '/register',
-		element: <CreateAccount />,
-		loader: createAccountLoader,
-		action: createAccountAction
-	}
+		path: '/home',
+		element: <Home />,
+		loader: homeLoader,
+		children: [
+		]
+	},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -1,7 +1,7 @@
 import { auth, database } from '../firebase.js';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { get, child, ref } from 'firebase/database';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const loader = async ({ params }) =>
 {	
@@ -17,11 +17,21 @@ const loader = async ({ params }) =>
 const Profile = () =>
 {
 	const userData = useLoaderData();
+	const navigate = useNavigate();
+
+	const logoutHandler = async (e) => 
+	{
+		await signOut(auth);
+		navigate('/');
+		console.log('out');
+	};
 	return(
 		<div>
 			<h1>{userData.firstName} {userData.lastName}</h1>
 			<h2>{userData.gradYear}</h2>
 			<h2>{userData.gpa}</h2>
+
+			<button className="button-primary" onClick={logoutHandler}>Sign Out</button>
 		</div>
 	);
 };
