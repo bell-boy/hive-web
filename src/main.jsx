@@ -39,16 +39,13 @@ const router = createBrowserRouter([
 				path: 'profile/:userid',
 				element: <Profile />,
 				loader: profileLoader
+			},
+			{
+				path: '/home',
+				element: <Home />,
 			}
 		]
   },
-	{
-		path: '/home',
-		element: <Home />,
-		loader: homeLoader,
-		children: [
-		]
-	},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

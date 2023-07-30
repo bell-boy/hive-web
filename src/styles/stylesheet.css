@@ -12,9 +12,16 @@ body, html {
 
 .site-flexbox {
 	height: 100vh;
+	width: 100vw;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+}
+
+.site-grid {
+	display: grid;
+	height: 100vh;
+	width: 100vw;
 }
 
 .auth-form {
@@ -49,7 +56,7 @@ body, html {
 	margin: 5px;
 
 	color: #ffffff;
-	font-weight: 800;
+	font-weight: 500;
 	background-color: #b8b8b8;
 	transition: 0.5s;
 }
@@ -57,6 +64,23 @@ body, html {
 .button-primary:hover {
 	cursor: pointer;
 	background-color: #a7a7a7;
+}
+
+.button-secondary {
+	border-style: none;
+	border-radius: 5px;
+	flex-basis: 30px;
+	padding: 7px;
+	margin: 5px;
+
+	color: #b8b8b8;
+	font-weight: 400;
+	background-color: #FFFFFF00;
+	transition: 0.5s;
+}
+
+.button-secondary:hover {
+	cursor: pointer;
 }
 
 .nav-bar 
@@ -81,4 +105,47 @@ body, html {
 
 .nav-bar-button
 {
+}
+
+.logo
+{
+	color: grey;
+	text-decoration: none;
+}
+
+.left-info-box
+{
+	background-color: #e5e5e5;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.right-info-box
+{
+	grid-column-start: 2;
+	grid-column-end: 3;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 30px;
+}
+
+.large-list
+{
+	list-style-type: none;
+	font-size: 40px;
+	font-weight: 500;
+	color: #999999;
+	padding: 0px 0px;
+}
+
+.large-list > li
+{
+	margin: 30px;
 }

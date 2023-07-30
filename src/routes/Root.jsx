@@ -18,7 +18,7 @@ const Root = () =>
 	return(
 		<>
 			<header className='nav-bar'>
-				<Link to='/'><h1>hive</h1></Link>
+				<Link to='/home' className='logo'><h1>hive</h1></Link>
 				{!user ? (
 					<div className='nav-bar-item'>
 						<Link to={`/login`}><button className='button-primary'>Login</button></Link>
