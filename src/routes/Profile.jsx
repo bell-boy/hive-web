@@ -22,8 +22,7 @@ const Profile = () =>
 	const logoutHandler = async (e) => 
 	{
 		await signOut(auth);
-		navigate('/');
-		console.log('out');
+		navigate('/home');
 	};
 	return(
 		<div>

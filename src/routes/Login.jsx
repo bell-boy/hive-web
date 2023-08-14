@@ -2,7 +2,6 @@ import { Form } from 'react-router-dom';
 import { auth } from '../firebase.js';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { redirect, Link } from 'react-router-dom';
-import '../styles/stylesheet.css';
 
 const action = async ({params, request}) =>
 {

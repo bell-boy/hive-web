@@ -1,32 +1,51 @@
 import { auth } from '../firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
 import { redirect, useNavigate, Outlet, useLoaderData, Link } from 'react-router-dom';
-import '../styles/stylesheet.css';
+import { useState, useEffect } from 'react';
+import Posting from './Posting.jsx';
 
 const loader = async () =>
 {
-	const user = await new Promise((resolve, reject) => {
-		onAuthStateChanged(auth, (user) => resolve(user));		
-	});
-	return user;
+	return null;
 };
 
 const Root = () =>
 {
 	const navigate = useNavigate();
-	const user = useLoaderData();
+	const [user, setUser] = useState(null);
+	useEffect(() =>
+	{
+		onAuthStateChanged(auth, (u) =>
+		{
+			setUser(u);
+		});
+	}, []);
 	return(
 		<>
-			<header className='nav-bar'>
-				<Link to='/home' className='logo'><h1>hive</h1></Link>
-				{!user ? (
-					<div className='nav-bar-item'>
-						<Link to={`/login`}><button className='button-primary'>Login</button></Link>
-						<Link to={`/register`}><button className='button-primary'>Register</button></Link>
+			<nav className='navbar navbar-expand-sm shadow-sm'>
+				<div className='container-fluid'>
+					<Link className='navbar-brand h1 navbar-header text-primary' to='/home'>hive</Link>
+					<ul className='navbar-nav'>
+						<li><Link className='nav-link'>login</Link></li>
+						<li><Link className='nav-link'>register</Link></li>
+					</ul>
+				</div>
+			</nav>
+			<div className='container-fluid p-3'>
+				<div className='row'>
+					<div className='col-5'>
+						<ul className='list-group'>
+							<Posting />						
+							<Posting />						
+							<Posting />						
+						</ul>
 					</div>
-				) : ( <Link to={`/profile/${user.uid}`}><button className='button-primary'>profile</button></Link> )}
-			</header>
-			<Outlet />
+					<div className='col'>
+						beans
+					</div>
+				</div>
+			</div>
+
 		</>
 	);
 };
