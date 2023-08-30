@@ -8,8 +8,7 @@ import { loader as rootLoader } from './routes/Root.jsx';
 import Login from './routes/Login.jsx';
 import { action as loginAction, loader as loginLoader } from './routes/Login.jsx';
 
-import CreateAccount from './routes/CreateAccount.jsx';
-import { action as createAccountAction, loader as createAccountLoader } from './routes/CreateAccount.jsx';
+import Admin from './routes/Admin.jsx';
 
 import Home from './routes/Home.jsx';
 import { loader as homeLoader } from './routes/Home.jsx';
@@ -30,12 +29,6 @@ const router = createBrowserRouter([
 				loader: loginLoader
 			},
 			{
-				path: '/register',
-				element: <CreateAccount />,
-				loader: createAccountLoader,
-				action: createAccountAction
-			},
-			{
 				path: 'profile/:userid',
 				element: <Profile />,
 				loader: profileLoader
@@ -46,6 +39,10 @@ const router = createBrowserRouter([
 			}
 		]
   },
+	{
+		path: '/admin',
+		element: <Admin />
+	}
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
