@@ -15,6 +15,7 @@ import { loader as homeLoader } from './routes/Home.jsx';
 
 import Profile from './routes/Profile.jsx';
 import { loader as profileLoader } from './routes/Profile.jsx';
+import NewListing from './routes/NewListing.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,8 +42,15 @@ const router = createBrowserRouter([
   },
 	{
 		path: '/admin',
-		element: <Admin />
+		element: <Admin />,
+		children: [
+			{
+				path: 'new',
+				element: <NewListing />
+			}
+		]
 	}
+	
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
