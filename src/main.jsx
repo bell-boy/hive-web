@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 // Route Imports
-import AdminLogin from './routes/admin/AdminLogin';
+import AdminRegister from './routes/admin/AdminRegister';
 
 
 const router = createBrowserRouter([
 	{
-		path: "/adminLogin",
-		element: <AdminLogin />
+		path: "/adminRegister",
+		element: <AdminRegister />
 	}
 ]);
 

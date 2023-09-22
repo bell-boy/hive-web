@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AdminLogin = () =>
+const AdminRegister = () =>
 {
     let [formState, setFormState] = useState({
         email: "",
@@ -11,7 +11,7 @@ const AdminLogin = () =>
         <div className="container-fluid">
             <div className="row">
                 <div className="column">
-                    <h1>Login</h1>
+                    <h1>Register</h1>
                 </div>
             </div>
             <div className="row">
@@ -44,4 +44,4 @@ const AdminLogin = () =>
         </div>
     );
 };
-export default AdminLogin;
+export default AdminRegister;
