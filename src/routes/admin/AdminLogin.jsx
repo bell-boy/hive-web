@@ -1,29 +1,27 @@
 import { useState } from "react";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-const AdminRegister = () =>
+const AdminLogin = () =>
 {
     let [formState, setFormState] = useState({
         email: "",
-        password: "",
-        companyName: ""
+        password: ""
     });
 
     // TODO: Error handling.
     // TODO: Re-route to dashboard.
     const submitForm = async () =>
     {
-        let userCred = await createUserWithEmailAndPassword(auth, formState.email, formState.password);
-        updateProfile(userCred.user, {displayName: formState.companyName});
-        sendEmailVerification(userCred.user);
+        let userCred = await signInWithEmailAndPassword(auth, formState.email, formState.password);
+        userCred.user.displayName = formState.companyName;
         console.log(userCred.user);
     };
     return (
         <div className="container-fluid">
             <div className="row">
                 <div className="column">
-                    <h1>Register</h1>
+                    <h1>Login</h1>
                 </div>
             </div>
             <div className="row">
@@ -50,21 +48,10 @@ const AdminRegister = () =>
             </div>
             <div className="row">
                 <div className="column">
-                    <label htmlFor="companyName">Organization Name</label>
-                    <input className="form-control" id="companyName" value={formState.companyName} onChange={
-                        (e) =>
-                        {
-                            setFormState({...formState, companyName: e.target.value});
-                        }
-                    }/>
-                </div>
-            </div>
-            <div className="row">
-                <div className="column">
                     <button type="button" className="btn btn-primary" onClick={submitForm} >submit</button>
                 </div>
             </div>
         </div>
     );
 };
-export default AdminRegister;
+export default AdminLogin;
