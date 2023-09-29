@@ -5,6 +5,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 // Route Imports
 import AdminRegister from './routes/admin/AdminRegister';
 import AdminLogin from './routes/admin/AdminLogin';
+import AdminRoot from './routes/admin/AdminRoot';
+import AdminListings from './routes/admin/AdminListings';
+import AdminNewListing from './routes/admin/AdminNewListing';
 
 
 const router = createBrowserRouter([
@@ -15,6 +18,20 @@ const router = createBrowserRouter([
 	{
 		path: "/admin/adminLogin",
 		element: <AdminLogin />
+	},
+	{
+		path: "/admin",
+		element: <AdminRoot />,
+		children: [
+			{
+				path:"/admin/dashboard",
+				element: <AdminListings />
+			},
+			{
+				path: "/admin/new",
+				element: <AdminNewListing />
+			}
+		]
 	}
 ]);
 
