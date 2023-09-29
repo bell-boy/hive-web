@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { auth } from "../../firebase";
+import { auth, database } from "../../firebase";
+import { push, ref, set } from "firebase/database";
+
+// TODO: Ensure that user is signed in.
 
 const AdminNewListing = () =>
 {
@@ -12,10 +15,21 @@ const AdminNewListing = () =>
     });
 
     // TODO: Error handling.
-    // TODO: Re-route to dashboard.
+    // TODO: visual conformation, and return to dash
     const submitForm = async () =>
     {
+        console.log(auth.currentUser); 
+        // Create a new posting
+        const postRef = ref(database, 'posts');
+        const newPostRef = push(postRef);
+        set(newPostRef, formState);
         
+        // Add that new Listing under the current user
+        const userRef = ref(database, `users/${auth.currentUser.uid}`);
+        const postAppendRef = push(userRef);
+        set(postAppendRef, newPostRef.key);
+
+
     };
     return (
         <div className="container-fluid">
@@ -60,11 +74,11 @@ const AdminNewListing = () =>
                 </div>
                 <div className="col">
                     <div className="container-fluid">
-                        <label htmlFor="website">end date</label>
-                        <input className="form-control" id="website" type="date" value={formState.endDate} onChange={
+                        <label htmlFor="endDate">end date</label>
+                        <input className="form-control" id="endDate" type="date" value={formState.endDate} onChange={
                             (e) =>
                             {
-                                setFormState({...formState, website: e.target.value});
+                                setFormState({...formState, endDate: e.target.value});
                             }
                         }/>
                     </div>
@@ -72,11 +86,11 @@ const AdminNewListing = () =>
             </div>
             <div className="row">
                 <div className="col">
-                    <label htmlFor="title">website</label>
-                    <input className="form-control" id="title" value={formState.website} onChange={
+                    <label htmlFor="website">website</label>
+                    <input className="form-control" id="website" value={formState.website} onChange={
                         (e) =>
                         {
-                            setFormState({...formState, title: e.target.website});
+                            setFormState({...formState, website: e.target.value});
                         }
                     } />
                 </div>
