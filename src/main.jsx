@@ -8,15 +8,16 @@ import AdminLogin from './routes/admin/AdminLogin';
 import AdminRoot from './routes/admin/AdminRoot';
 import AdminListings from './routes/admin/AdminListings';
 import AdminNewListing from './routes/admin/AdminNewListing';
+import AdminEditListing from './routes/admin/AdminEditListing';
 
 
 const router = createBrowserRouter([
 	{
-		path: "/admin/adminRegister",
+		path: "/admin/register",
 		element: <AdminRegister />
 	},
 	{
-		path: "/admin/adminLogin",
+		path: "/admin/login",
 		element: <AdminLogin />
 	},
 	{
@@ -25,11 +26,15 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path:"/admin",
-				element: <AdminListings />
+				element: <AdminListings />,
 			},
 			{
 				path: "/admin/new",
 				element: <AdminNewListing />
+			},
+			{
+				path: "/admin/edit/:postid",
+				element: <AdminEditListing />,
 			}
 		]
 	}
