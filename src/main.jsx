@@ -9,9 +9,31 @@ import AdminRoot from './routes/admin/AdminRoot';
 import AdminListings from './routes/admin/AdminListings';
 import AdminNewListing from './routes/admin/AdminNewListing';
 import AdminEditListing from './routes/admin/AdminEditListing';
+import ClientRoot from './routes/client/ClientRoot';
+import ClientDashboard, { ClientDashboardLoader } from './routes/client/ClientDashboard';
+import ClientJobPosting, { ClientJobPostingLoader } from './routes/client/ClientJobPosting';
 
 
 const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <ClientRoot />,
+		children: [
+			{
+				path: "/",
+				element: <ClientDashboard />,
+				loader: ClientDashboardLoader,
+				children: [
+					{
+						path: "/job/:jobid",
+						element: <ClientJobPosting />,
+						loader: ClientJobPostingLoader
+					}
+				]
+			}
+		]
+	},
+
 	{
 		path: "/admin/register",
 		element: <AdminRegister />
@@ -35,6 +57,7 @@ const router = createBrowserRouter([
 			{
 				path: "/admin/edit/:postid",
 				element: <AdminEditListing />,
+				loader: ClientDashboardLoader
 			}
 		]
 	}

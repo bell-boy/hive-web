@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 // TODO: Ensure that user is signed in.
 // TODO: Ensure that a user is allowed to edit a post
+// TODO: Enable Deletion
 
 const AdminEditListing = () =>
 {
@@ -34,7 +35,7 @@ const AdminEditListing = () =>
         <div className="container-fluid">
             <div className="row">
                 <div className="col">
-                    <h1>New Listing</h1>
+                    <h1>Edit Listing</h1>
                 </div>
             </div>
             <div className="row">

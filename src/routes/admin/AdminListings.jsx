@@ -23,7 +23,7 @@ const AdminListings = () =>
                 }
                 setListings(real_data);
                 setListItems(real_data.map((obj, index) => {
-                    return <PostingCard title={obj.title} description={obj.description} postid={obj.postid} key={index} />;
+                    return <PostingCard title={obj.title} description={obj.description} postid={obj.postid} startDate={obj.startDate} endDate={obj.endDate} key={index} />;
                 }));
             }
         });
@@ -40,13 +40,13 @@ const AdminListings = () =>
     );
 };
 
-const PostingCard = ({title, description, postid}) => 
+const PostingCard = ({title, description, startDate, endDate, postid}) => 
 {
     return (
         <div className="card m-2" style={{width: "700px"}}>
                 <div className="card-header">
                 <h2>{title}</h2>
-                <span>date - date</span>
+                <span>{startDate} - {endDate}</span>
             </div>
             <div className="card-body">
                 <p className="card-text">{description}</p>
