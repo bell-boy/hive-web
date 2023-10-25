@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { auth, database } from "../../firebase";
+import { auth, database, storage } from "../../firebase";
 import { get, push, ref, set } from "firebase/database";
 import { useParams } from "react-router-dom";
+import { getDownloadURL, list, listAll, ref as sRef } from "firebase/storage";
 
 // TODO: Ensure that user is signed in.
 // TODO: Ensure that a user is allowed to edit a post
@@ -16,11 +17,22 @@ const AdminEditListing = () =>
         endDate: "",
         website: ""
     });
+    let [applicants, setApplicants] = useState(null);
     const { postid } = useParams();
     useEffect(() => {
         get(ref(database, `posts/${postid}`)).then((data) =>
         {
             setFormState(data.val());
+        });
+
+        listAll(sRef(storage, `posts/${postid}`)).then((res) =>
+        {
+            let listData = [];
+            res.items.forEach((itemRef) =>
+            {
+                listData.push(itemRef);
+            });
+            setApplicants(listData.map((val, idx) => <Application key={idx} postRef={val} />));
         });
     }, []);
 
@@ -100,6 +112,27 @@ const AdminEditListing = () =>
                     <button type="button" className="btn btn-primary" onClick={submitForm} >submit</button>
                 </div>
             </div>
+            <div className="list-group">
+                {applicants}
+            </div>
+        </div>
+    );
+};
+
+const Application = ({email, postRef}) =>
+{
+    const download = () => {
+
+    };
+    return (
+        <div className="container-fluid">
+            <h5>{postRef.name}</h5>
+            <button onClick={(e) => {
+                getDownloadURL(postRef).then((val) =>
+                {
+                    window.open(val, "_blank");
+                });
+            }}>download application</button>
         </div>
     );
 };
