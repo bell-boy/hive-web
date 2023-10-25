@@ -35,7 +35,7 @@ const ClientDashboardLoader = async () =>
 const PostingCard = ({title, description, startDate, endDate, postid}) => 
 {
     return (
-        <Link className="list-group-item list-group-item-action" to={`/job/${postid}`} style={{width: "500px"}} >
+        <Link className="list-group-item list-group-item-action" to={`/listings/job/${postid}`} style={{width: "500px"}} >
                 <div className="card-header">
                 <h2>{title}</h2>
                 <span>{startDate} - {endDate}</span>

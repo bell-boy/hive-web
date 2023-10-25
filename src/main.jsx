@@ -12,20 +12,25 @@ import AdminEditListing from './routes/admin/AdminEditListing';
 import ClientRoot from './routes/client/ClientRoot';
 import ClientDashboard, { ClientDashboardLoader } from './routes/client/ClientDashboard';
 import ClientJobPosting, { ClientJobPostingLoader } from './routes/client/ClientJobPosting';
+import LandingPage from './routes/client/LandingPage';
 
 
 const router = createBrowserRouter([
 	{
 		path: "/",
+		element: <LandingPage />
+	},
+	{
+		path: "/listings",
 		element: <ClientRoot />,
 		children: [
 			{
-				path: "/",
+				path: "/listings",
 				element: <ClientDashboard />,
 				loader: ClientDashboardLoader,
 				children: [
 					{
-						path: "/job/:jobid",
+						path: "/listings/job/:jobid",
 						element: <ClientJobPosting />,
 						loader: ClientJobPostingLoader
 					}
