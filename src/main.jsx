@@ -5,16 +5,61 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 // Route Imports
 import AdminRegister from './routes/admin/AdminRegister';
 import AdminLogin from './routes/admin/AdminLogin';
+import AdminRoot from './routes/admin/AdminRoot';
+import AdminListings from './routes/admin/AdminListings';
+import AdminNewListing from './routes/admin/AdminNewListing';
+import AdminEditListing from './routes/admin/AdminEditListing';
+import ClientRoot from './routes/client/ClientRoot';
+import ClientDashboard, { ClientDashboardLoader } from './routes/client/ClientDashboard';
+import ClientJobPosting, { ClientJobPostingLoader } from './routes/client/ClientJobPosting';
 
 
 const router = createBrowserRouter([
 	{
-		path: "/admin/adminRegister",
+		path: "/",
+		element: <ClientRoot />,
+		children: [
+			{
+				path: "/",
+				element: <ClientDashboard />,
+				loader: ClientDashboardLoader,
+				children: [
+					{
+						path: "/job/:jobid",
+						element: <ClientJobPosting />,
+						loader: ClientJobPostingLoader
+					}
+				]
+			}
+		]
+	},
+
+	{
+		path: "/admin/register",
 		element: <AdminRegister />
 	},
 	{
-		path: "/admin/adminLogin",
+		path: "/admin/login",
 		element: <AdminLogin />
+	},
+	{
+		path: "/admin",
+		element: <AdminRoot />,
+		children: [
+			{
+				path:"/admin",
+				element: <AdminListings />,
+			},
+			{
+				path: "/admin/new",
+				element: <AdminNewListing />
+			},
+			{
+				path: "/admin/edit/:postid",
+				element: <AdminEditListing />,
+				loader: ClientDashboardLoader
+			}
+		]
 	}
 ]);
 
