@@ -25,16 +25,24 @@ const ClientJobPosting = () =>
         uploadBytes(newJobRef, fileRef.current.files[0]).then((snapshot) => console.log("success"));
     };
     return (
-        <div>
-            <h1>{postData.title}</h1>
-            <span>{postData.startDate} - {postData.endDate}</span>
+        <div className="border rounded p-3" style={{width: "70vw"}}>
+            <h1 style={{}}>{postData.title}</h1>
+            <p>{postData.startDate} - {postData.endDate}</p>
+            <a href={`${postData.website}`}>{postData.website}</a>
             <p>{postData.description}</p>
-            <a>{postData.website}</a>
-            <p>resume</p>
-            <input className="form-control" type="file" ref={fileRef}></input>
-            <p>email</p>
-            <input className="form-control" type="text" onChange={(e) => setEmail(e.target.value)}></input>
-            <button onClick={sumbitData}>submit</button>
+            <button className="btn" type="button" style={{backgroundColor: "#f4d12f", color: "white"}} data-bs-toggle="collapse" data-bs-target="#formCollaspe" aria-expanded="false">Apply</button>
+            <div className="collapse" id="formCollaspe">
+                <div className="card card-body my-2">
+                    <div>
+                        <p>resume</p>
+                        <input className="form-control" type="file" ref={fileRef}></input>
+                        <p>email</p>
+                        <input className="form-control" type="text" onChange={(e) => setEmail(e.target.value)}></input>
+                    </div>
+                    <button onClick={sumbitData} className="btn my-2" style={{backgroundColor: "#f4d12f", color: "white"}}>submit</button>
+                </div>
+            </div>
+            
         </div>
     );
 };

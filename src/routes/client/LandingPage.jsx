@@ -4,7 +4,7 @@ const LandingPage = () =>
 {
     return(
         <div className="container-fluid p-0">
-            <nav className="navbar px-5" style={{backgroundColor: "#eeede9",}}>
+            <nav className="navbar px-5 border-bottom" style={{backgroundColor: "#eeede9",}}>
                 <div className="container-fluid">
                     <Link className="navbar-brand h1" style={{color: "#f4d12f", fontSize: "30px"}} to="/">hive</Link>
                     <div className="d-flex flex-row" style={{gap: "30px"}}>
@@ -21,11 +21,11 @@ const LandingPage = () =>
                     <p style={{marginTop: "30px"}}>Hive is a tool for Houston high schoolers to find internship, research, and volenteer opportunites outside of the classroom</p>
                     <Link className="btn" style={{backgroundColor: "#f4d12f", color: "white"}} to="/listings">View Listings</Link>
                 </div>
-                <img src="../../../../public/landing-page-img-1.jpg" height="250px" className="rounded"/>
+                <img src="public/landing-page-img-1.jpg" height="250px" className="rounded"/>
             </div>
 
             <div className="d-flex justify-content-between align-items-center" style={{paddingLeft: "250px",paddingRight: "250px",height: "100vh", backgroundColor: "#988b6b"}}>
-                <img src="../../../../public/landing-page-img-2.jpg" height="300px" className="rounded"/>
+                <img src="public/landing-page-img-2.jpg" height="300px" className="rounded"/>
                 <div style={{margin: "30px"}}>
                     <h3 style={{color: "#eeede9"}}>real companies,</h3>
                     <h1 style={{color: "#eeede9"}}>real impact.</h1>
@@ -41,7 +41,7 @@ const LandingPage = () =>
                     <p style={{}}>With the advent of the internet, high school students are gaining knowledge and skills comparable to undergrads in vairous fields. Hive lets your organization take advantage of this large untapped labour market. </p>
                     <Link className="btn" style={{backgroundColor: "#f4d12f", color: "white"}} to="/admin/register">Sign Up</Link>
                 </div>
-                <img src="../../../../public/landing-page-img-3.jpg" height="300px" className="rounded"/>
+                <img src="/landing-page-img-3.jpg" height="300px" className="rounded"/>
             </div>
             <footer className="text-center p-3">made with ❤️ by femi</footer>
         </div>

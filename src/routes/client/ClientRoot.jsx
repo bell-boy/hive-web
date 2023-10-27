@@ -4,9 +4,9 @@ const ClientRoot = () =>
 {
     return (
         <div>
-            <nav className="navbar bg-body-tertiary">
+            <nav className="navbar px-5 border-bottom" style={{backgroundColor: "#eeede9",}}>
                 <div className="container-fluid">
-                    <a className="navbar-brand h1 text-primary">hive</a>
+                    <Link className="navbar-brand h1" style={{color: "#f4d12f", fontSize: "30px"}} to="/">hive</Link>
                 </div>
             </nav>
             <Outlet />

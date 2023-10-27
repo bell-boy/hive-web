@@ -17,8 +17,8 @@ const ClientDashboard = () => {
         <PostingCard title={value.title} description={value.description} startDate={value.startDate} endDate={value.endDate} postid={value.key} key={value.key} />));
     }, []);
     return (
-        <div className="d-flex flex-row">
-            <div className="list-group">
+        <div className="d-flex flex-row p-3" style={{gap: "50px"}}>
+            <div className="list-group list-group-flush">
                 {listItems}
             </div>
             <Outlet />
@@ -35,13 +35,10 @@ const ClientDashboardLoader = async () =>
 const PostingCard = ({title, description, startDate, endDate, postid}) => 
 {
     return (
-        <Link className="list-group-item list-group-item-action" to={`/listings/job/${postid}`} style={{width: "500px"}} >
+        <Link className="list-group-item list-group-item-action" to={`/listings/job/${postid}`} style={{width: "30vw"}} >
                 <div className="card-header">
                 <h2>{title}</h2>
                 <span>{startDate} - {endDate}</span>
-            </div>
-            <div className="card-body">
-                <p className="card-text">{description}</p>
             </div>
         </Link>
     );
