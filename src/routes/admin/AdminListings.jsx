@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { child, get, getDatabase, ref} from "firebase/database";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth, database } from "../../firebase";
 import { useEffect, useState } from "react";
 
@@ -9,6 +9,7 @@ const AdminListings = () =>
 {
     let [listings, setListings] = useState([]);
     let [listItems, setListItems] = useState([]);
+    let navigate = useNavigate();
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
             if(user) 
@@ -30,12 +31,13 @@ const AdminListings = () =>
     }, []);
     return (
         <div className="container-fluid">
-            <div className="row">
-                <div className="column">
-                    {listItems}
-                </div>
+            <div className="d-flex flex-direction-row justify-content-between my-2">
+                <h3>Active Listings</h3>
+                <button className="btn" style={{backgroundColor: "#f4d12f", color: "white"}} onClick={() => navigate("/admin/new")}>new listing</button>
             </div>
-            <Link className="btn btn-primary" to="/admin/new">new listing</Link>
+            <div className="d-flex border rounded align-items-center flex-column overflow-y-scroll" style={{height: "75vh"}} >
+                {listItems.length == 0 ? <p>no active listings</p> : listItems}
+            </div>
         </div>
     );
 };

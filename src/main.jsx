@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 // Route Imports
 import AdminRegister, { registerLoader } from './routes/admin/AdminRegister';
 import AdminLogin from './routes/admin/AdminLogin';
-import AdminRoot from './routes/admin/AdminRoot';
+import AdminRoot, { AdminLoader } from './routes/admin/AdminRoot';
 import AdminListings from './routes/admin/AdminListings';
 import AdminNewListing from './routes/admin/AdminNewListing';
 import AdminEditListing from './routes/admin/AdminEditListing';
@@ -52,6 +52,7 @@ const router = createBrowserRouter([
 	{
 		path: "/admin",
 		element: <AdminRoot />,
+		loader: AdminLoader,
 		children: [
 			{
 				path:"/admin",

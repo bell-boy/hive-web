@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { auth, database } from "../../firebase";
 import { push, ref, set } from "firebase/database";
+import { redirect, useNavigate } from "react-router-dom";
 
 // TODO: Ensure that user is signed in.
 
@@ -13,23 +14,26 @@ const AdminNewListing = () =>
         endDate: "",
         website: ""
     });
+    const navigate = useNavigate();
 
     // TODO: Error handling.
     // TODO: visual conformation, and return to dash
     const submitForm = async () =>
     {
-        console.log(auth.currentUser); 
-        // Create a new posting
+        setFormState({...formState, companyName: auth.currentUser.name});
         const postRef = ref(database, 'posts');
         const newPostRef = push(postRef);
-        set(newPostRef, formState);
+        set(newPostRef, formState).then(() => 
+        {
+            // Add that new Listing under the current user
+            const userRef = ref(database, `users/${auth.currentUser.uid}`);
+            const postAppendRef = push(userRef);
+            set(postAppendRef, newPostRef.key).then(() =>
+            {
+                navigate("/admin");
+            });
+        });
         
-        // Add that new Listing under the current user
-        const userRef = ref(database, `users/${auth.currentUser.uid}`);
-        const postAppendRef = push(userRef);
-        set(postAppendRef, newPostRef.key);
-
-
     };
     return (
         <div className="container-fluid">

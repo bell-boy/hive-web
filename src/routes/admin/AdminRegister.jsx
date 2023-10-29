@@ -14,7 +14,6 @@ const loader = async () =>
     });
     if(isLoggedIn) return redirect('/admin/');
     else return null;
-    
 };
 
 const AdminRegister = () =>
