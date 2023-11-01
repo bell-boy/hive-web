@@ -24,11 +24,11 @@ const LandingPage = () =>
                     <p style={{marginTop: "30px"}}>Hive is a tool for Houston high schoolers to find internship, research, and volenteer opportunites outside of the classroom</p>
                     <Link className="btn" style={{backgroundColor: "#f4d12f", color: "white"}} to="/listings">View Listings</Link>
                 </div>
-                <img src="public/landing-page-img-1.jpg" height="250px" className="rounded"/>
+                <img src="landing-page-img-1.jpg" height="250px" className="rounded"/>
             </div>
 
             <div className="d-flex justify-content-between align-items-center" style={{paddingLeft: "250px",paddingRight: "250px",height: "100vh", backgroundColor: "#988b6b"}}>
-                <img src="public/landing-page-img-2.jpg" height="300px" className="rounded"/>
+                <img src="landing-page-img-2.jpg" height="300px" className="rounded"/>
                 <div style={{margin: "30px"}}>
                     <h3 style={{color: "#eeede9"}}>real companies,</h3>
                     <h1 style={{color: "#eeede9"}}>real impact.</h1>
