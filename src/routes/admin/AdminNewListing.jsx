@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth, database } from "../../firebase";
 import { push, ref, set } from "firebase/database";
 import { redirect, useNavigate } from "react-router-dom";
@@ -12,15 +12,19 @@ const AdminNewListing = () =>
         description: "",
         startDate: "",
         endDate: "",
-        website: ""
+        website: "",
+        companyName: ""
     });
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setFormState({...formState, companyName: auth.currentUser.displayName});
+    },[]);
 
     // TODO: Error handling.
     // TODO: visual conformation, and return to dash
     const submitForm = async () =>
     {
-        setFormState({...formState, companyName: auth.currentUser.name});
         const postRef = ref(database, 'posts');
         const newPostRef = push(postRef);
         set(newPostRef, formState).then(() => 

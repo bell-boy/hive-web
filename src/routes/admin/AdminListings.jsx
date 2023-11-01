@@ -36,7 +36,7 @@ const AdminListings = () =>
                 <button className="btn" style={{backgroundColor: "#f4d12f", color: "white"}} onClick={() => navigate("/admin/new")}>new listing</button>
             </div>
             <div className="d-flex border rounded align-items-center flex-column overflow-y-scroll" style={{height: "75vh"}} >
-                {listItems.length == 0 ? <p>no active listings</p> : listItems}
+                {listItems.length == 0 ? <p className="my-3">no active listings</p> : listItems}
             </div>
         </div>
     );
@@ -52,7 +52,10 @@ const PostingCard = ({title, description, startDate, endDate, postid}) =>
             </div>
             <div className="card-body">
                 <p className="card-text">{description}</p>
-                <Link className="btn btn-primary" to={`/admin/edit/${postid}`}>edit</Link>
+                <div className="d-flex gap-2">
+                    <Link className="btn btn-primary" to={`/admin/edit/${postid}`}>edit</Link>
+                    <Link className="btn btn-primary" to={`/admin/view/${postid}`}>view</Link>
+                </div>
             </div>
         </div>
     );

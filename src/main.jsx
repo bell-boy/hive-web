@@ -13,6 +13,7 @@ import ClientRoot from './routes/client/ClientRoot';
 import ClientDashboard, { ClientDashboardLoader } from './routes/client/ClientDashboard';
 import ClientJobPosting, { ClientJobPostingLoader } from './routes/client/ClientJobPosting';
 import LandingPage from './routes/client/LandingPage';
+import AdminViewListings from './routes/admin/AdminViewListing';
 
 
 const router = createBrowserRouter([
@@ -65,6 +66,11 @@ const router = createBrowserRouter([
 			{
 				path: "/admin/edit/:postid",
 				element: <AdminEditListing />,
+				loader: ClientDashboardLoader
+			},
+			{
+				path: "/admin/view/:postid",
+				element: <AdminViewListings />,
 				loader: ClientDashboardLoader
 			}
 		]

@@ -27,8 +27,9 @@ const ClientJobPosting = () =>
     return (
         <div className="border rounded p-3" style={{width: "70vw"}}>
             <h1 style={{}}>{postData.title}</h1>
+            <h2>{postData.companyName}</h2>
             <p>{postData.startDate} - {postData.endDate}</p>
-            <a href={`${postData.website}`}>{postData.website}</a>
+            <a href={`https://${postData.website}`}>{postData.website}</a>
             <p>{postData.description}</p>
             <button className="btn" type="button" style={{backgroundColor: "#f4d12f", color: "white"}} data-bs-toggle="collapse" data-bs-target="#formCollaspe" aria-expanded="false">Apply</button>
             <div className="collapse" id="formCollaspe">
