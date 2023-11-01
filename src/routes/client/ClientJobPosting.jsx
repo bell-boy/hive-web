@@ -17,6 +17,7 @@ const ClientJobPosting = () =>
     let postData = useLoaderData();
     let fileRef = useRef(null);
     let [email, setEmail] = useState("");
+    let [submissionState, setSubmissionState] = useState("waiting");
     let { jobid } = useParams();
     const sumbitData = () => {
         let newJobRef = sRef(storage, `posts/${jobid}/${email}`);
@@ -29,7 +30,7 @@ const ClientJobPosting = () =>
             <h1 style={{}}>{postData.title}</h1>
             <h2>{postData.companyName}</h2>
             <p>{postData.startDate} - {postData.endDate}</p>
-            <a href={`https://${postData.website}`}>{postData.website}</a>
+            <a href={`/${postData.website}`}>{postData.website}</a>
             <p>{postData.description}</p>
             <button className="btn" type="button" style={{backgroundColor: "#f4d12f", color: "white"}} data-bs-toggle="collapse" data-bs-target="#formCollaspe" aria-expanded="false">Apply</button>
             <div className="collapse" id="formCollaspe">

@@ -104,7 +104,7 @@ const AdminNewListing = () =>
                 </div>
             </div>
             <div className="row">
-                <div className="col">
+                <div className="col py-2 d-flex gap-2">
                     <button type="button" className="btn btn-primary" onClick={submitForm} >submit</button>
                 </div>
             </div>

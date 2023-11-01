@@ -18,13 +18,15 @@ const AdminListings = () =>
                 let real_data = [];
                 for(const key in data.val())
                 {
-                    const element = await get(ref(database, `posts/${data.val()[key]}`));
-                    real_data.push(element.val());
+                    let element = (await get(ref(database, `posts/${data.val()[key]}`))).val();
+                    element.urlKey = key;
+                    console.log(element);
+                    real_data.push(element);
                     real_data[real_data.length - 1].postid = data.val()[key]; 
                 }
                 setListings(real_data);
                 setListItems(real_data.map((obj, index) => {
-                    return <PostingCard title={obj.title} description={obj.description} postid={obj.postid} startDate={obj.startDate} endDate={obj.endDate} key={index} />;
+                    return <PostingCard title={obj.title} description={obj.description} urlKey={obj.urlKey} postid={obj.postid} startDate={obj.startDate} endDate={obj.endDate} key={index} />;
                 }));
             }
         });
@@ -42,7 +44,7 @@ const AdminListings = () =>
     );
 };
 
-const PostingCard = ({title, description, startDate, endDate, postid}) => 
+const PostingCard = ({title, description, urlKey, startDate, endDate, postid}) => 
 {
     return (
         <div className="card m-2" style={{width: "700px"}}>
@@ -53,7 +55,7 @@ const PostingCard = ({title, description, startDate, endDate, postid}) =>
             <div className="card-body">
                 <p className="card-text">{description}</p>
                 <div className="d-flex gap-2">
-                    <Link className="btn btn-primary" to={`/admin/edit/${postid}`}>edit</Link>
+                    <Link className="btn btn-primary" to={`/admin/edit/${postid}/${urlKey}`}>edit</Link>
                     <Link className="btn btn-primary" to={`/admin/view/${postid}`}>view</Link>
                 </div>
             </div>

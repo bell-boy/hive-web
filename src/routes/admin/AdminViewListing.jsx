@@ -3,7 +3,7 @@ import { child, get, getDatabase, ref} from "firebase/database";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { auth, database, storage } from "../../firebase";
 import { useEffect, useState } from "react";
-import { getDownloadURL, listAll, ref as sRef } from "firebase/storage";
+import { deleteObject, getDownloadURL, listAll, ref as sRef } from "firebase/storage";
 
 // TODO: Ensure that a user is signed in
 const AdminViewListings = () =>
@@ -22,7 +22,7 @@ const AdminViewListings = () =>
                     {
                         listData.push(itemRef);
                     });
-                    setApplicants(listData.map((val, idx) => <CandidateCard key={idx} postRef={val} />));
+                    setApplicants(listData.map((val, idx) => <CandidateCard key={idx} postRef={val} refresh={() => navigate(0)} />));
                 });
             }
         });
@@ -39,7 +39,7 @@ const AdminViewListings = () =>
     );
 };
 
-const CandidateCard = ({title, description, postRef}) => 
+const CandidateCard = ({title, description, postRef, refresh}) => 
 {
     return (
         <div className="card m-2" style={{width: "700px"}}>
@@ -49,7 +49,13 @@ const CandidateCard = ({title, description, postRef}) =>
             <div className="card-body">
                 <p className="card-text">{description}</p>
                 <div className="d-flex gap-2">
-                    <button className="btn btn-danger">reject</button>
+                    <button className="btn btn-danger" onClick={() => {
+                        deleteObject(postRef).then(() =>
+                        {
+                            refresh();
+                            console.log(refresh);
+                        });
+                    }}>reject</button>
                     <button className="btn" style={{backgroundColor: "#f4d12f"}} onClick={(e) => {
                         getDownloadURL(postRef).then((val) =>
                         {

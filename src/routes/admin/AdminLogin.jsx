@@ -11,10 +11,12 @@ const AdminLogin = () =>
     });
 
     const navigate = useNavigate();
+    let [submitting, setSubmitting] = useState(false);
 
     // TODO: Error handling.
     const submitForm = () =>
     {
+        setSubmitting(true);
         signInWithEmailAndPassword(auth, formState.email, formState.password).then((userCred) => {
             navigate("/admin/");
         }).catch((error) => {
@@ -53,7 +55,10 @@ const AdminLogin = () =>
                 </div>
                 <div className="row">
                     <div className="column my-2">
-                        <button type="submit" className="btn" onClick={submitForm} style={{backgroundColor: "#f4d12f"}} >submit</button>
+                    <button type="submit" className={`btn ${submitting ? "disabled" : ""}`} onClick={submitForm} style={{backgroundColor: "#f4d12f"}} >{submitting ? 
+                        <div className="spinner-border text-light" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div> : "submit"}</button>
                     </div>
                 </div>
             </div>

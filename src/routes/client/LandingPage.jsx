@@ -6,7 +6,10 @@ const LandingPage = () =>
         <div className="container-fluid p-0">
             <nav className="navbar px-5 border-bottom" style={{backgroundColor: "#eeede9",}}>
                 <div className="container-fluid">
-                    <Link className="navbar-brand h1" style={{color: "#f4d12f", fontSize: "30px"}} to="/">hive</Link>
+                    <div className="d-flex gap-2 flex-row align-items-center">
+                        <img src="/bee.png" height="30px" />
+                        <Link className="navbar-brand h1" style={{color: "#f4d12f", fontSize: "30px"}} to="/">hive</Link>
+                    </div>
                     <div className="d-flex flex-row" style={{gap: "30px"}}>
                         <Link className="nav-link" to="/listings">listings</Link>
                         <Link className="nav-link" to="/admin/register">organization login</Link>

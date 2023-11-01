@@ -64,7 +64,7 @@ const router = createBrowserRouter([
 				element: <AdminNewListing />
 			},
 			{
-				path: "/admin/edit/:postid",
+				path: "/admin/edit/:postid/:postlocation",
 				element: <AdminEditListing />,
 				loader: ClientDashboardLoader
 			},
