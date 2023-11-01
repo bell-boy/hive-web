@@ -17,13 +17,18 @@ const ClientJobPosting = () =>
     let postData = useLoaderData();
     let fileRef = useRef(null);
     let [email, setEmail] = useState("");
-    let [submissionState, setSubmissionState] = useState("waiting");
+    let [submissionState, setSubmissionState] = useState(false);
     let { jobid } = useParams();
     const sumbitData = () => {
         let newJobRef = sRef(storage, `posts/${jobid}/${email}`);
         // TODO: add loading icon.
         // TODO: prevent duplicates
-        uploadBytes(newJobRef, fileRef.current.files[0]).then((snapshot) => console.log("success"));
+        setSubmissionState(true);
+        uploadBytes(newJobRef, fileRef.current.files[0]).then((snapshot) => 
+        {
+            alert('Application Submitted!');
+            setSubmissionState(false);
+        });
     };
     return (
         <div className="border rounded p-3" style={{width: "70vw"}}>
@@ -41,7 +46,10 @@ const ClientJobPosting = () =>
                         <p>email</p>
                         <input className="form-control" type="text" onChange={(e) => setEmail(e.target.value)}></input>
                     </div>
-                    <button onClick={sumbitData} className="btn my-2" style={{backgroundColor: "#f4d12f", color: "white"}}>submit</button>
+                    <button onClick={sumbitData} className={`btn my-2 ${submissionState ? "disabled" : ""}`} style={{backgroundColor: "#f4d12f", color: "white"}}>{submissionState ? 
+                        <div className="spinner-border text-light" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div> : "submit"}</button>
                 </div>
             </div>
             
