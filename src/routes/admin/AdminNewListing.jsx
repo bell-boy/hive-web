@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth, database } from "../../firebase";
 import { push, ref, set } from "firebase/database";
+import { redirect, useNavigate } from "react-router-dom";
 
 // TODO: Ensure that user is signed in.
 
@@ -11,25 +12,32 @@ const AdminNewListing = () =>
         description: "",
         startDate: "",
         endDate: "",
-        website: ""
+        website: "",
+        companyName: ""
     });
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setFormState({...formState, companyName: auth.currentUser.displayName});
+    },[]);
 
     // TODO: Error handling.
     // TODO: visual conformation, and return to dash
     const submitForm = async () =>
     {
-        console.log(auth.currentUser); 
-        // Create a new posting
         const postRef = ref(database, 'posts');
         const newPostRef = push(postRef);
-        set(newPostRef, formState);
+        set(newPostRef, formState).then(() => 
+        {
+            // Add that new Listing under the current user
+            const userRef = ref(database, `users/${auth.currentUser.uid}`);
+            const postAppendRef = push(userRef);
+            set(postAppendRef, newPostRef.key).then(() =>
+            {
+                navigate("/admin");
+            });
+        });
         
-        // Add that new Listing under the current user
-        const userRef = ref(database, `users/${auth.currentUser.uid}`);
-        const postAppendRef = push(userRef);
-        set(postAppendRef, newPostRef.key);
-
-
     };
     return (
         <div className="container-fluid">
@@ -96,7 +104,7 @@ const AdminNewListing = () =>
                 </div>
             </div>
             <div className="row">
-                <div className="col">
+                <div className="col py-2 d-flex gap-2">
                     <button type="button" className="btn btn-primary" onClick={submitForm} >submit</button>
                 </div>
             </div>
